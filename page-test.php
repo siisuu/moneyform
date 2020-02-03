@@ -51,24 +51,24 @@
 <?php
 
 
-// $wallet_name = $wpdb->get_col( $wpdb->prepare(
-//   "SELECT DISTINCT wallet_name
-//    FROM $wpdb->asset"
-// ));
-//
-// $asset_sum = 0;
-// //合計値を取得
-// for($i=0; $i<count($wallet_name); $i++) {
-//   $sum = $wpdb->get_row( $wpdb->prepare(
-//     "SELECT * FROM $wpdb->asset
-//     WHERE wallet_name = %s
-//     AND created BETWEEN %s AND %s
-//     order by created desc limit 1",
-//     [$wallet_name[$i], $start_time, $end_time]
-//   ));
-//   $asset_sum += $sum->price;
-// }
-// ?>
-<h1><?php //echo $asset_sum. "円"; ?></h1>
+$wallet_name = $wpdb->get_col( $wpdb->prepare(
+  "SELECT DISTINCT wallet_name
+   FROM $wpdb->asset"
+));
+
+$asset_sum = 0;
+//合計値を取得
+for($i=0; $i<count($wallet_name); $i++) {
+  $sum = $wpdb->get_row( $wpdb->prepare(
+    "SELECT * FROM $wpdb->asset
+    WHERE wallet_name = %s
+    AND created BETWEEN %s AND %s
+    order by created desc limit 1",
+    [$wallet_name[$i], $start_time, $end_time]
+  ));
+  $asset_sum += $sum->price;
+}
+?>
+<h1><?php echo $asset_sum. "円"; ?></h1>
 
 <?php get_footer(); ?>
